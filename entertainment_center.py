@@ -9,6 +9,8 @@ names = ["forrest gump","Avengers","avatar","inception","fight club","the matrix
 OMDBapikey = "" # Add your api key that is obtained from omdbapi
 youtubeAPIkey = "" # Add your youtube api key
 
+
+
 # A function to get the video id of youtube's trailer
 def getTrailerID(title):
     url = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/search?part=id&maxResults=1&q="+ urllib.parse.quote(title+" trailer") +"&type=videoId&key="+youtubeAPIkey)
@@ -26,8 +28,15 @@ def details(title):
     loaded_json = json.loads(output)
     ID = getTrailerID(title)
     movies.append(media.Movie(loaded_json['Title'],loaded_json['Plot'],loaded_json['Poster'],ID))
-     
-for name in names:
-    details(name)
 
-fresh_tomatoes.open_movies_page(movies)
+with open('movies.json') as movies:
+  data = json.load(movies)
+
+print(data['movies'])
+
+
+
+#for name in names:
+#    details(name)
+
+#fresh_tomatoes.open_movies_page(movies)
